@@ -12,6 +12,14 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
+    name: 'Gastos'
+  }, {
+    url: '/Gastos/RegistrarGastos',
+    iconComponent: { name: 'cil-star' },
+    name: 'Registrar Gastos',
+  },
+  {
+    title: true,
     name: 'Theme'
   },
   {

@@ -8,7 +8,11 @@ import { Page404Component } from './page404/page404.component';
 import { Page500Component } from './page500/page500.component';
 import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserProvider } from 'src/app/providers/UserProvider';
+import { HttpClientModule } from '@angular/common/http';
+import { CategoriaProvider } from 'src/app/providers/CategoriaProvider';
+import { TiposDeGastosProvider } from 'src/app/providers/TiposDeGastosProvider';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,12 @@ import { IconModule } from '@coreui/icons-angular';
     ButtonModule,
     GridModule,
     IconModule,
-    FormModule
+    FormModule,
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
+  providers: [
+    UserProvider
   ]
 })
 export class PagesModule {

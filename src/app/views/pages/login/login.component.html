@@ -5,29 +5,27 @@
         <c-card-group>
           <c-card class="p-4">
             <c-card-body>
-              <form cForm>
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <h1>Login</h1>
                 <p class="text-medium-emphasis">Sign In to your account</p>
                 <c-input-group class="mb-3">
-                  <span cInputGroupText>
-                    <svg cIcon name="cilUser"></svg>
-                  </span>
-                  <input autoComplete="username" cFormControl placeholder="Username" />
+                  <span cInputGroupText>&#64;</span>
+
+                  <input formControlName="email" autoComplete="email" placeholder="Email" />
+                  <div *ngIf="loginForm.get('email')?.hasError('invalidEmail')" class="text-danger">
+                    Invalid email format.
+                  </div>
                 </c-input-group>
                 <c-input-group class="mb-4">
                   <span cInputGroupText>
                     <svg cIcon name="cilLockLocked"></svg>
                   </span>
-                  <input
-                    autoComplete="current-password"
-                    cFormControl
-                    placeholder="Password"
-                    type="password"
-                  />
+                  <input formControlName="contrasena" autoComplete="current-password" placeholder="Password"
+                    type="password" />
                 </c-input-group>
                 <c-row>
                   <c-col xs="6">
-                    <button cButton class="px-4" color="primary">
+                    <button cButton class="px-4" color="primary" type="submit">
                       Login
                     </button>
                   </c-col>

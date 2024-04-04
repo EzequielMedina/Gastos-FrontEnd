@@ -1,0 +1,71 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form [formGroup]="registrarGastosForm" (ngSubmit)="onSubmit()">
+                <h1 class="mb-4">Registro de Gasto</h1>
+                <div class="mb-3">
+                    <label for="nombreGasto" class="form-label">Nombre del Gasto</label>
+                    <input type="text" class="form-control" id="nombreGasto" formControlName="nombreGasto">
+                    <div *ngIf="registrarGastosForm.get('nombreGasto')?.errors && registrarGastosForm.get('nombreGasto')?.errors!['required']"
+                        class="text-danger">
+                        El nombre del gasto es obligatorio.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="monto" class="form-label">Monto</label>
+                    <input type="number" class="form-control" id="monto" formControlName="monto">
+                    <div *ngIf="registrarGastosForm.get('monto')?.errors && registrarGastosForm.get('monto')?.errors!['required']"
+                        class="text-danger">
+                        El monto es obligatorio.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="fecha" class="form-label">Fecha Actual</label>
+                    <input type="date" class="form-control" id="fecha" formControlName="fecha">
+                    <div *ngIf="registrarGastosForm.get('fecha')?.errors && registrarGastosForm.get('fecha')?.errors!['required']"
+                        class="text-danger">
+                        La fecha es obligatoria.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="descripcion" formControlName="descripcion"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="usuario" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="usuario" formControlName="usuario" readonly
+                        style="background-color: lightgray;">
+                    <div *ngIf="registrarGastosForm.get('usuario')?.errors && registrarGastosForm.get('usuario')?.errors!['required']"
+                        class="text-danger">
+                        El usuario es obligatorio.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="categoria" class="form-label">Categoría</label>
+                    <select class="form-select" id="categoria" formControlName="categoria">
+                        @for (item of listCategira; track $index) {
+                        <option value="{{item.categoriaId}}">{{item.nombre}}</option>
+                        }
+                        <!-- Agrega más opciones según tus necesidades -->
+                    </select>
+
+                </div>
+                <div class="mb-3">
+                    <label for="tipoGasto" class="form-label">Tipo de Gasto</label>
+                    <select class="form-select" id="tipoGasto" formControlName="tipoGasto">
+                        @for (item of listTipoGasto; track $index) {
+                        <option value="{{item.tipoGastoId}}">{{item.nombre}}</option>
+                        }
+                        <!-- Agrega más opciones según tus necesidades -->
+                    </select>
+
+                </div>
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="tarjeta" formControlName="tarjeta">
+                    <label class="form-check-label" for="tarjeta">Tarjeta</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
