@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   AvatarModule,
@@ -21,7 +21,9 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 
 import { WidgetsModule } from '../widgets/widgets.module';
-
+import { UserProvider } from 'src/app/providers/UserProvider';
+import { PeriodosProvider } from 'src/app/providers/PeriodosProvider';
+import { IngresoProvider } from 'src/app/providers/IngresoProvider';
 @NgModule({
   imports: [
     DashboardRoutingModule,
@@ -40,9 +42,15 @@ import { WidgetsModule } from '../widgets/widgets.module';
     ChartjsModule,
     AvatarModule,
     TableModule,
-    WidgetsModule
+    WidgetsModule,
+    FormsModule
   ],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent],
+
+  providers: [UserProvider,
+    PeriodosProvider,
+    IngresoProvider
+  ]
 })
 export class DashboardModule {
 }

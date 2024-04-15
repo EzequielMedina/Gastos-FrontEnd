@@ -20,12 +20,20 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="fecha" class="form-label">Fecha Actual</label>
+                    <label for="fecha" class="form-label">Fecha De Pago</label>
                     <input type="date" class="form-control" id="fecha" formControlName="fecha">
                     <div *ngIf="registrarGastosForm.get('fecha')?.errors && registrarGastosForm.get('fecha')?.errors!['required']"
                         class="text-danger">
                         La fecha es obligatoria.
                     </div>
+                </div>
+                <div class="mb-3">
+                    <label for="periodo" class="form-label">Periodo</label>
+                    <select class="form-select" id="periodo" formControlName="periodo">
+                        @for (item of listPeriodo; track $index) {
+                        <option value="{{item.periodold}}" [selected]="$index == 0">{{item.nombrePeriodo}}</option>
+                        }
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Descripción</label>
@@ -44,9 +52,8 @@
                     <label for="categoria" class="form-label">Categoría</label>
                     <select class="form-select" id="categoria" formControlName="categoria">
                         @for (item of listCategira; track $index) {
-                        <option value="{{item.categoriaId}}">{{item.nombre}}</option>
+                        <option value="{{item.categoriald}}" [selected]="$index == 0">{{item.nombre}}</option>
                         }
-                        <!-- Agrega más opciones según tus necesidades -->
                     </select>
 
                 </div>
@@ -54,7 +61,7 @@
                     <label for="tipoGasto" class="form-label">Tipo de Gasto</label>
                     <select class="form-select" id="tipoGasto" formControlName="tipoGasto">
                         @for (item of listTipoGasto; track $index) {
-                        <option value="{{item.tipoGastoId}}">{{item.nombre}}</option>
+                        <option value="{{item.tipoGastold}}" [selected]="$index == 0">{{item.nombre}}</option>
                         }
                         <!-- Agrega más opciones según tus necesidades -->
                     </select>
@@ -62,8 +69,48 @@
                 </div>
                 <div class="form-check mb-3">
                     <input type="checkbox" class="form-check-input" id="tarjeta" formControlName="tarjeta">
-                    <label class="form-check-label" for="tarjeta">Tarjeta</label>
+                    <label class="form-check-label" for="tarjeta">Gasto de Tarjeta</label>
                 </div>
+                @if(registrarGastosForm.get('tarjeta')?.value){
+                <div class="mb-3">
+                    <label for="tipoTarjeta" class="form-label">Elegir tarjeta</label>
+                    <select class="form-select" id="tipoTarjeta" formControlName="tipoTarjeta">
+                        @for (item of listTipoTarjeta; track $index) {
+                        <option value="{{item.tarjetaId}}" [selected]="$index == 0">{{item.nombre}}</option>
+                        }
+                        <!-- Agrega más opciones según tus necesidades -->
+                    </select>
+
+                </div>
+                <c-row>
+
+                    <c-col md="6" xl="6" xs="12">
+
+                        <div class="mb-3">
+                            <label for="CuotasTotales" class="form-label">Cantidad de cuotas totales</label>
+                            <input type="number" class="form-control" id="cuotasTotales"
+                                formControlName="cuotasTotales">
+                            <div *ngIf="registrarGastosForm.get('cuotasTotales')?.errors && registrarGastosForm.get('cuotasTotales')?.errors!"
+                                class="text-danger">
+                                las coutas totales son obligatorio.
+                            </div>
+                        </div>
+                    </c-col>
+                    <c-col md="6" xl="6" xs="12">
+
+                        <div class="mb-3">
+                            <label for="cuotasActuales" class="form-label">couta Actual</label>
+                            <input type="number" class="form-control" id="cuotasActuales"
+                                formControlName="cuotasActuales">
+                            <div *ngIf="registrarGastosForm.get('cuotasActuales')?.errors && registrarGastosForm.get('cuotasActuales')?.errors!"
+                                class="text-danger">
+                                la couta actual es obligatorio.
+                            </div>
+                        </div>
+                    </c-col>
+                </c-row>
+                }
+
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
         </div>

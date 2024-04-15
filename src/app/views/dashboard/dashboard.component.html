@@ -12,58 +12,23 @@
         </button>
         <form [formGroup]="trafficRadioGroup">
           <c-button-group class="float-end me-3" role="group">
-            <input
-              class="btn-check"
-              formControlName="trafficRadio"
-              type="radio"
-              value="Day"
-            />
-            <label
-              (click)="setTrafficPeriod('Day')"
-              cButton
-              cFormCheckLabel
-              color="secondary"
-              variant="outline"
-            >Day</label>
+            <input class="btn-check" formControlName="trafficRadio" type="radio" value="Day" />
+            <label (click)="setTrafficPeriod('Day')" cButton cFormCheckLabel color="secondary"
+              variant="outline">Day</label>
 
-            <input
-              class="btn-check"
-              formControlName="trafficRadio"
-              type="radio"
-              value="Month"
-            />
-            <label
-              (click)="setTrafficPeriod('Month')"
-              cButton
-              cFormCheckLabel
-              color="secondary"
-              variant="outline"
-            >Month</label>
+            <input class="btn-check" formControlName="trafficRadio" type="radio" value="Month" />
+            <label (click)="setTrafficPeriod('Month')" cButton cFormCheckLabel color="secondary"
+              variant="outline">Month</label>
 
-            <input
-              class="btn-check"
-              formControlName="trafficRadio"
-              type="radio"
-              value="Year"
-            />
-            <label
-              (click)="setTrafficPeriod('Year')"
-              cButton
-              cFormCheckLabel
-              color="secondary"
-              variant="outline"
-            >Year</label>
+            <input class="btn-check" formControlName="trafficRadio" type="radio" value="Year" />
+            <label (click)="setTrafficPeriod('Year')" cButton cFormCheckLabel color="secondary"
+              variant="outline">Year</label>
           </c-button-group>
         </form>
       </c-col>
     </c-row>
-    <c-chart
-      [data]="mainChart.data"
-      [height]="300"
-      [ngStyle]="{ 'marginTop.px': 40 }"
-      [options]="mainChart.options"
-      [type]="mainChart.type"
-    >
+    <c-chart [data]="mainChart.data" [height]="300" [ngStyle]="{ 'marginTop.px': 40 }" [options]="mainChart.options"
+      [type]="mainChart.type">
       Main chart
     </c-chart>
   </c-card-body>
@@ -113,47 +78,118 @@
 <c-row>
   <c-col xs>
     <c-card class="mb-4">
-      <c-card-header>Traffic {{ "&" }} Sales</c-card-header>
+      <c-card-header>Registro de ingreso</c-card-header>
+      <c-card-body>
+        <form [formGroup]="registrarIngresoForm" (ngSubmit)="guardarIngreso()">
+          <c-row>
+            <c-col md="6" xl="6" xs="12">
+              <c-row>
+                <div class="mb-3">
+                  <label for="monto" class="form-label">Monto</label>
+                  <input type="text" class="form-control" id="monto" formControlName="monto">
+                  <div
+                    *ngIf="registrarIngresoForm.get('monto')?.errors && registrarIngresoForm.get('monto')?.errors!['required']"
+                    class="text-danger">
+                    El nombre del gasto es obligatorio.
+                  </div>
+                </div>
+
+              </c-row>
+              <c-row>
+                <div class="mb-3">
+                  <label for="descripcion" class="form-label">Descripción</label>
+                  <input type="text" class="form-control" id="descripcion" formControlName="descripcion">
+                  <div
+                    *ngIf="registrarIngresoForm.get('descripcion')?.errors && registrarIngresoForm.get('descripcion')?.errors!['required']"
+                    class="text-danger">
+                    El nombre del gasto es obligatorio.
+                  </div>
+                </div>
+
+              </c-row>
+            </c-col>
+            <c-col md="6" xl="6" xs="12">
+              <c-row>
+
+                <div class="mb-3">
+                  <label for="fecha" class="form-label">Fecha De Cobro</label>
+                  <input type="date" class="form-control" id="fecha" formControlName="fecha">
+                  <div
+                    *ngIf="registrarIngresoForm.get('fecha')?.errors && registrarIngresoForm.get('fecha')?.errors!['required']"
+                    class="text-danger">
+                    La fecha es obligatoria.
+                  </div>
+                </div>
+              </c-row>
+              <c-row>
+                <div class="divider d-flex justify-content-center mb-3">
+                  <label class="form-label"></label>
+
+                  <button type="submit" class="btn btn-primary " style="margin-top: 3.5rem;"> Guardar
+                  </button>
+                </div>
+              </c-row>
+            </c-col>
+          </c-row>
+        </form>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+
+
+<c-row>
+  <c-col xs>
+    <c-card class="mb-4">
+      <c-card-header>Total de Gastos</c-card-header>
       <c-card-body>
         <c-row>
-          <c-col md="6" xl="6" xs="12">
-            <c-row>
-              <c-col sm="6">
-                <div
-                  class="border-start border-start-4 border-start-info py-1 px-3 mb-3"
-                >
-                  <div class="text-medium-emphasis small">New Clients</div>
-                  <div class="fs-5 fw-semibold">9,123</div>
-                </div>
-              </c-col>
-              <c-col sm="6">
-                <div
-                  class="border-start border-start-4 border-start-danger py-1 px-3 mb-3"
-                >
-                  <div class="text-medium-emphasis small">
-                    Recurring Clients
+          <!-- <c-col md="6" xl="6" xs="12"> -->
+          <c-row>
+            @for (item of usersGrupo; track $index) {
+            <c-col sm="6">
+              <div class="border-start border-start-4 border-start-primary py-1 px-3 mb-3">
+                <div class="text-medium-emphasis small">{{item.nombre}}</div>
+                @if(item.nombre == "Ezequiel Medina"){
+                <div class="fs-5 fw-semibold">{{gastoTotalEzequiel | currency:'ARS ':'symbol':'1.2-2' }}</div>
+                }@else if(item.nombre == "Brenda Luna"){
+                <div class="fs-5 fw-semibold">{{gastoTotalBrenda | currency:'ARS ':'symbol':'1.2-2'}}</div>
+                }
+              </div>
+            </c-col>
+            }
+            <!-- <c-col sm="6">
+                  <div class="border-start border-start-4 border-start-info py-1 px-3 mb-3">
+                    <div class="text-medium-emphasis small">New Clients</div>
+                    <div class="fs-5 fw-semibold">9,123</div>
                   </div>
-                  <div class="fs-5 fw-semibold">22,643</div>
-                </div>
-              </c-col>
-            </c-row>
+                </c-col>
+                <c-col sm="6">
+                  <div class="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
+                    <div class="text-medium-emphasis small">
+                      Recurring Clients
+                    </div>
+                    <div class="fs-5 fw-semibold">22,643</div>
+                  </div>
+                </c-col> -->
+          </c-row>
 
-            <hr class="mt-0" />
+          <hr class="mt-0" />
 
-            <div class="progress-group mb-4">
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Monday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info" value="34"></c-progress-bar>
-                </c-progress>
-                <c-progress thin>
-                  <c-progress-bar color="danger" value="78"></c-progress-bar>
-                </c-progress>
-              </div>
+          <div class="progress-group mb-4">
+            <div class="progress-group-prepend">
+              <span class="text-medium-emphasis small">{{user.nombre}}</span>
             </div>
-            <div class="progress-group mb-4">
+            <div class="progress-group-bars">
+              <c-progress thin>
+                <c-progress-bar color="info" [value]="porcentaje"></c-progress-bar>
+              </c-progress>
+              <!-- <c-progress thin>
+                  <c-progress-bar color="danger" value="78"></c-progress-bar>
+                </c-progress> -->
+            </div>
+          </div>
+          <!-- <div class="progress-group mb-4">
               <div class="progress-group-prepend">
                 <span class="text-medium-emphasis small">Tuesday</span>
               </div>
@@ -230,8 +266,8 @@
                   <c-progress-bar color="danger" value="69"></c-progress-bar>
                 </c-progress>
               </div>
-            </div>
-            <div class="legend text-center" ngPreserveWhitespaces>
+            </div> -->
+          <!-- <div class="legend text-center" ngPreserveWhitespaces>
               <small>
                 <sup>
                   <span class="badge badge-pill badge-sm bg-info">&nbsp;</span>
@@ -243,10 +279,11 @@
                 </sup>
                 <span>Recurring clients</span>
               </small>
-            </div>
-          </c-col>
+            </div> -->
+          <!-- </c-col> -->
 
-          <c-col md="6" xl="6" xs="12">
+          <!-- <c-col md="6" xl="6" xs="12">
+            
             <c-row>
               <c-col sm="6">
                 <div class="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
@@ -346,98 +383,111 @@
               </div>
             </div>
             <div class="divider d-flex justify-content-center">
-              <button
-                cButton
-                class="text-muted btn-link"
-                color="transparent"
-                size="sm"
-                type="button"
-              >
+              <button cButton class="text-muted btn-link" color="transparent" size="sm" type="button">
                 <svg cIcon name="cil-options"></svg>
               </button>
             </div>
-          </c-col>
+          </c-col> -->
         </c-row>
       </c-card-body>
     </c-card>
   </c-col>
 </c-row>
+<!-- detalle de gastos por periodos -->
 <c-row>
   <c-col xs>
     <c-card class="mb-4">
-      <c-card-header>Users</c-card-header>
+      <c-card-header>Detalle de Gasto por Periodo</c-card-header>
       <c-card-body>
-        <table
-          [hover]="true"
-          [responsive]="true"
-          [striped]="true"
-          align="middle"
-          cTable
-          class="mb-0 border"
-        >
+        <div class="mb-3">
+          <label for="periodo" class="form-label">Periodo</label>
+          <select class="form-select" id="periodo" [(ngModel)]="periodoSeleccionado"
+            (ngModelChange)="cambioDePeriodo()">
+            @for (item of listPeriodo; track $index) {
+            <option value="{{item.periodold}}" [selected]="$index == 0">{{item.nombrePeriodo}}</option>
+            }
+          </select>
+        </div>
+        <table [hover]="true" [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
           <thead cTableColor="light">
             <tr>
-              <th class="text-center">
+              <!-- <th class="text-center">
                 <svg cIcon name="cilPeople"></svg>
-              </th>
-              <th>User</th>
-              <th class="text-center">Country</th>
-              <th>Usage</th>
-              <th class="text-center">Payment Method</th>
-              <th>Activity</th>
+              </th> -->
+              <th>Usuarios</th>
+              <th class="text-center">Pertenece</th>
+              <th class="text-center">Descripción</th>
+
+              <th>Fecha de vencimiento</th>
+              <!-- <th class="text-center">Payment Method</th> -->
+              <th>Monto Total</th>
+              @for (item of usersGrupo; track $index) {
+
+              <th>Monto {{item.nombre}}</th>
+              }
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of users; index as i">
-              <td class="text-center">
-                <c-avatar
-                  size="md"
-                  src="{{ user.avatar }}"
-                  status="{{ user.status }}"
-                ></c-avatar>
-              </td>
+            <tr *ngFor="let gasto of listGastos; index as i">
+              <!-- <td class="text-center">
+                <c-avatar size="md" src="{{ user.avatar }}" status="{{ user.status }}"></c-avatar>
+              </td> -->
               <td>
-                <div>{{ user.name }}</div>
+                <div>{{ gasto.personaldNavigation.nombre }}</div>
                 <div class="small text-medium-emphasis text-nowrap">
                   <span>
-                    {{ user.state }} | Registered: {{ user.registered }}
+                    {{ gasto.personaldNavigation.email }}
                   </span>
                 </div>
               </td>
+
               <td class="text-center">
-                <svg
-                  cIcon
-                  id="{{ user.country + user.name }}"
-                  name="cif{{ user.country }}"
-                  size="xl"
-                  title="{{ user.country }}"
-                ></svg>
+                <span>{{gasto.tipoGastoldNavigation.nombre}}</span>
               </td>
-              <td>
-                <div class="d-flex justify-content-between">
-                  <div class="float-start">
-                    <strong>{{ user.usage }}%</strong>
-                  </div>
-                  <div class="float-end ms-1 text-nowrap">
+              <td class="text-center">
+                <span>{{gasto.descripcion}}</span>
+              </td>
+              <td class="text-center">
+                <!-- <div class="d-flex justify-content-between">
+                  <div class="float-start"> -->
+                <span>{{ gasto.fecha | date:'dd/MM/yyyy'}}</span>
+                <!-- </div> -->
+                <!-- <div class="float-end ms-1 text-nowrap">
                     <small class="text-medium-emphasis">
-                      {{ user.period }}
+                      {{ gasto.monto }}
                     </small>
-                  </div>
-                </div>
-                <c-progress thin>
-                  <c-progress-bar
-                    [value]="user.usage"
-                    color="{{ user.color }}"
-                  ></c-progress-bar>
-                </c-progress>
+                  </div> -->
+                <!-- </div> -->
+                <!-- <c-progress thin>
+                  <c-progress-bar [value]="user.usage" color="{{ user.color }}"></c-progress-bar>
+                </c-progress> -->
               </td>
               <td class="text-center">
-                <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
+                <div class="fw-semibold text-nowrap">{{ gasto.monto}}</div>
               </td>
-              <td>
-                <div class="small text-medium-emphasis">Last login</div>
-                <div class="fw-semibold text-nowrap">{{ user.activity }}</div>
+              @if(gasto.tipoGastoldNavigation.nombre == "Compartido"){
+              @for (item of usersGrupo; track $index) {
+
+              <td class="text-center">
+                <div class="fw-semibold text-nowrap">{{ gasto.monto / 2 }}</div>
               </td>
+              }
+              }
+              @else {
+              @if(gasto.tipoGastoldNavigation.nombre == "Brenda"){
+              <td></td>
+              <td class="text-center">
+                <div class="fw-semibold text-nowrap">{{ gasto.monto }}</div>
+              </td>
+              }@else if(gasto.tipoGastoldNavigation.nombre == "Ezequiel"){
+              <td class="text-center">
+                <div class="fw-semibold text-nowrap">{{ gasto.monto }}</div>
+              </td>
+              <td></td>
+              }
+
+
+              }
             </tr>
           </tbody>
         </table>

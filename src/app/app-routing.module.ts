@@ -74,7 +74,17 @@ const routes: Routes = [
       {
         path: 'Gastos',
         loadChildren: () =>
-          import('./views/Gastos/create-gastos/gastos.module').then((m) => m.GastosModule)
+          import('./views/Gastos/gastos.module').then((m) => m.GastosModule)
+      },
+      {
+        path: 'Periodos',
+        loadChildren: () =>
+          import('./views/Periodos/Periodos.module').then((m) => m.PeriodosModule)
+      },
+      {
+        path: 'Tarjetas',
+        loadChildren: () =>
+          import('./views/Tarjeta/Tarjeta.module').then((m) => m.TarjetaModule)
       }
     ]
   },

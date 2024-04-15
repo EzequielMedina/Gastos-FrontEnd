@@ -1,6 +1,6 @@
 export class CategoriaModel {
     // Propiedades de la clase
-    public categoriaId: string = '';
+    public categoriald: string = '';
     public nombre: string = "";
     public gastos: [] = [];
 

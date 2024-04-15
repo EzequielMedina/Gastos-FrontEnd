@@ -5,10 +5,13 @@ import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angula
 import { IconModule } from '@coreui/icons-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CreateGastosComponent } from './create-gastos.component';
+import { CreateGastosComponent } from './create-gastos/create-gastos.component';
 import { GastosRoutingModule } from './gastos-routing.module';
 import { TiposDeGastosProvider } from 'src/app/providers/TiposDeGastosProvider';
 import { CategoriaProvider } from 'src/app/providers/CategoriaProvider';
+import { GastosProvider } from 'src/app/providers/GastosProvider';
+import { PeriodosProvider } from 'src/app/providers/PeriodosProvider';
+import { TarjetaProvider } from 'src/app/providers/TarjetaProvider';
 @NgModule({
     declarations: [
         CreateGastosComponent,
@@ -27,7 +30,10 @@ import { CategoriaProvider } from 'src/app/providers/CategoriaProvider';
     providers: [
 
         CategoriaProvider,
-        TiposDeGastosProvider
+        TiposDeGastosProvider,
+        GastosProvider,
+        PeriodosProvider,
+        TarjetaProvider
     ]
 })
 export class GastosModule {

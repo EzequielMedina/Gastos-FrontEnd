@@ -1,0 +1,19 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form [formGroup]="registrarTarjetaForm" (ngSubmit)="onSubmit()">
+                <h1 class="mb-4">Registro de Tarjetas</h1>
+                <div class="mb-3">
+                    <label for="nombreTarjeta" class="form-label">Nombre de la Tarjeta</label>
+                    <input type="text" class="form-control" id="nombreTarjeta" formControlName="nombreTarjeta">
+                    <div *ngIf="registrarTarjetaForm.get('nombreTarjeta')?.errors && registrarTarjetaForm.get('nombreTarjeta')?.errors!['required']"
+                        class="text-danger">
+                        El nombre de la Tarjeta es obligatorio.
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>

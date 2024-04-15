@@ -31,4 +31,12 @@ export class UserProvider {
         return this.http.post<ResponseBaseModel>(url, body, { headers: header });
 
     }
+    getByPersonGrupo(periodoId: string): Observable<ResponseBaseModel> {
+
+        const url = `${this.urlBase}User/GetByPersonasGrupo`;
+        const header = { "content-type": "application/json" };
+        const body = JSON.stringify(periodoId);
+        return this.http.post<ResponseBaseModel>(url, body, { headers: header });
+
+    }
 }

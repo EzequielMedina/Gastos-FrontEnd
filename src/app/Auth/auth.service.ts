@@ -7,12 +7,12 @@ import { ResponseBaseModel } from '../Models/ResponseBaseModel';
 export class AuthService {
 
   constructor() { }
-  private isLoggedIn = false; // Variable para simular si el usuario está autenticado
+  private isLoggedIn = true; // Variable para simular si el usuario está autenticado
 
   login(res: ResponseBaseModel): void {
     // Aquí iría la lógica real para iniciar sesión y obtener el token
     let token = res.data.token;
-    this.isLoggedIn = true;
+    // this.isLoggedIn = true;
     sessionStorage.setItem('token', token); // Guarda el token en el almacenamiento local
     sessionStorage.setItem("email", res.data.email);
   }

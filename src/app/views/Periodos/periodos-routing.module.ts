@@ -1,25 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CreateGastosComponent } from './create-gastos.component';
-
+import { CreatePeriodoComponent } from './create-periodo/create-periodo.component';
 
 const routes: Routes = [
     {
         path: '',
         data: {
-            title: 'Theme',
+            title: 'Periodos',
         },
         children: [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'Gastos',
+                redirectTo: 'Periodos',
             },
             {
-                path: 'RegistrarGastos',
-                component: CreateGastosComponent,
+                path: 'RegistrarPeriodo',
+                component: CreatePeriodoComponent,
                 data: {
-                    title: 'Registrar Gastos',
+                    title: 'Registrar Periodos',
                 },
             }
 
@@ -31,4 +30,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class GastosRoutingModule { }
+export class PeriodosRoutingModule { }
